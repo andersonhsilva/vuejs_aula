@@ -1,17 +1,29 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> -
-    <router-link to="/basket">Shopping Bag (0)</router-link> 
+    <router-link to="/basket">Shopping Bag ({{ this.productsInBag.length }})</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
 
-  export default {
+export default {
 
-  }
-  
+  created() {
+    // chama o metodo loadProducts, pelo dispacho, em açao no store do vuex
+    this.$store.dispatch('loadProducts');
+  },
+
+  // aqui esta computed esta sento utilizada da maneira tradicional sem uso de mapState tornando o codigo com mais quantidade de linhas com uso do return
+  computed: {
+    productsInBag() {
+      return this.$store.state.productsInBag;
+    },
+  },
+
+}
+
 </script>
 
 
