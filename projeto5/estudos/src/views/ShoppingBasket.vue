@@ -2,24 +2,28 @@
   <div class="basket">
     <div class="items">
 
-      <div class="item" v-for="(product, index) in this.productsInBag" :key="index">
-        <div class="remove" @click="this.removeFromBag(product.id);">Remover do carrinho</div>
-        <div class="photo">
-          <a target="_blank" :href="product.image">
-            <img :src="product.image" alt="">
-          </a>
+      <template v-if="this.productsInBag.length">
+        <div class="item" v-for="(product, index) in this.productsInBag" :key="index">
+          <div class="remove" @click="this.removeFromBag(product.id);">Remover do carrinho</div>
+          <div class="photo">
+            <a target="_blank" :href="product.image">
+              <img :src="product.image" alt="">
+            </a>
+          </div>
+          <div class="description">{{ product.title }}</div>
+          <div class="price">
+            <span class="quantity-area">
+              <button :disabled="product.quantity == 1"
+                @click="product.quantity > 1 ? product.quantity-- : 1">-</button>
+              <span class="quantity">{{ product.quantity }}</span>
+              <button @click="product.quantity++">+</button>
+            </span>
+            <span class="amount">Unidade: ${{ product.price.toFixed(2) }}</span>
+            <span class="amount">Total: ${{ this.productPrice(product) }}</span>
+          </div>
         </div>
-        <div class="description">{{ product.title }}</div>
-        <div class="price">
-          <span class="quantity-area">
-            <button :disabled="product.quantity == 1" @click="product.quantity > 1 ? product.quantity-- : 1">-</button>
-            <span class="quantity">{{ product.quantity }}</span>
-            <button @click="product.quantity++">+</button>
-          </span>
-          <span class="amount">Unidade: ${{ product.price.toFixed(2) }}</span> 
-          <span class="amount">Total: ${{ this.productPrice(product) }}</span>
-        </div>
-      </div>
+      </template>
+      <h4 v-else style="color:red">Nenhum item adicionado ao carrinho</h4>
 
       <div class="grand-total"> Grand Total: ${{ totalPrice() }}</div>
 

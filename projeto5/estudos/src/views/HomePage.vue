@@ -19,9 +19,12 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'HomePage',
+
   data() {
+
     return {
     }
+    
   },
 
   // as computed a baixo utilizam o mapState importado acima, porem o requisito é o nome do metodo ser igual ao nome do store state do vuex no array do mapa

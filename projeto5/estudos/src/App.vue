@@ -11,15 +11,19 @@
 export default {
 
   created() {
-    // chama o metodo loadProducts, pelo dispacho, em açao no store do vuex
-    this.$store.dispatch('loadProducts');
+       
+    this.$store.dispatch('loadProducts'); // chama o metodo loadProducts, pelo dispacho, em açao no store do vuex
+    this.$store.dispatch('loadBag');
+
   },
 
   // aqui esta computed esta sento utilizada da maneira tradicional sem uso de mapState tornando o codigo com mais quantidade de linhas com uso do return
   computed: {
+
     productsInBag() {
       return this.$store.state.productsInBag;
     },
+
   },
 
 }
